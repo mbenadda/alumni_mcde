@@ -1,9 +1,13 @@
-var express = require('express');
-var logger  = require('./lib/logger');
+var express    = require('express');
+var bodyParser = require('body-parser');
+var logger     = require('./lib/logger');
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
-app.use(require('morgan')('default', { stream: logger.steam })); // Pass express' logs to our logger
+// Pass express' logs to our Winston logger
+app.use(require('morgan')('dev', { stream: logger.steam }));
+// All our API calls will be formatted as JSON. This parses it and populates req.body with their content
+app.use(bodyParser.json());
 
 // Connect to the database and get an instance of the connection
 var db = require('./lib/db')();
@@ -12,5 +16,5 @@ var db = require('./lib/db')();
 var routes = require('./app')(app);
 
 var server = app.listen(app.get('port'), function () {
-  console.log('Listining on port %d', server.address().port);
+  logger.info('Listening on port %d', server.address().port);
 });
