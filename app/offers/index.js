@@ -4,7 +4,7 @@ var Offer = require('../../models/Offer.js').model;
 var router = express.Router();
 
 // Get a list of offers
-router.get('/', require('get_list'));
+router.get('/', require('./get_list'));
 
 // If the offer parameter is present, use this middleware
 router.param('offer', function (req, res, next, id) {
@@ -12,6 +12,8 @@ router.param('offer', function (req, res, next, id) {
     .populate('author')
     .exec(function (err, docs) {
       if (err) {
+        res.status(500)
+           .send(err);
         throw new Error(err);
       }
       if (!docs) {
@@ -24,17 +26,18 @@ router.param('offer', function (req, res, next, id) {
 });
 
 // Get a single offer
-router.get('/:offer', require('get_single'));
+router.get('/:offer', require('./get_single'));
 
 // Verify that the requesting user is authorized before going any further
 router.use(function (req, res, next) {
-
+  // For now don't check anything, just pass through
+  next();
 });
 
 // Create a new offer
-router.post('/', require('create'));
+router.post('/', require('./create'));
 
 // Edit an existing offer
-router.put('/:offer', require('edit'));
+router.put('/:offer', require('./edit'));
 
 module.exports = router;
