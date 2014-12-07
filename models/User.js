@@ -1,16 +1,20 @@
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  passportLocalMongoose = require('passport-local-mongoose');
+    Schema = mongoose.Schema,
+    passportLocalMongoose = require('passport-local-mongoose');
 
 /**
  * Static email and passwords are handled by passportLocalMongoose.
  * To see the fields and options it uses, see https://github.com/saintedlama/passport-local-mongoose
  */
-var Account = new Schema({
-  name: String,
-  first_name: String,
+var User = new Schema({
+  name: {
+    first: { type: String, required: true, index: true },
+    last: { type: String, required: true, index: true }
+  },
   // Characterizes the user as an administrator
   is_admin: { type: Boolean, default: false },
+  // Characterizes the user as an editor
+  is_editor: { type: Boolean, default: false },
   // Characterizes the user as an alumni member
   is_member: { type: Boolean, default: false },
   // Characterizes the user as a recruiter
@@ -19,11 +23,11 @@ var Account = new Schema({
   lastupdate: { type: Date, default: Date.now }
 });
 
-Account.plugin(passportLocalMongoose, {
+User.plugin(passportLocalMongoose, {
   usernameField: 'email'
 });
 
 module.exports = {
-  schema: Account,
-  model: mongoose.model('Account', Account)
+  schema: User,
+  model: mongoose.model('User', User)
 }
