@@ -1,0 +1,19 @@
+{
+	"env": {
+		"node": "true"
+	},
+	"rules": {
+
+		// Use single quotes, except when it avoids having to escape one
+		"quotes": [ 2, "single", "avoid-escape" ],
+
+		// Do not forbid unused arguments as their names are often informative
+		"no-unused-vars": [ 2, { "vars": "all", "args": "none" } ],
+
+		// This rule currently lacks granularity.
+		"no-multi-spaces": 0,
+
+		// Accomodate for the uppercase model names as they are useful for readability
+		"new-cap": 0
+	}
+}
