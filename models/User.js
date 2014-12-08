@@ -27,7 +27,4 @@ User.plugin(passportLocalMongoose, {
   usernameField: 'email'
 });
 
-module.exports = {
-  schema: User,
-  model: mongoose.model('User', User)
-}
+module.exports = mongoose.model('User', User);

@@ -1,5 +1,5 @@
 var _      = require('lodash');
-var User   = require('../../../models/User.js').model;
+var User   = require('../../../models/User.js');
 var logger = require('../../../lib/logger');
 
 module.exports = function (req, res, next) {
