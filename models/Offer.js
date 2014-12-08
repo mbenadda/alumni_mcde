@@ -13,7 +13,4 @@ var Offer = new Schema({
   lastupdate: { type: Date, default: Date.now }
 })
 
-module.exports = {
-  schema: Offer,
-  model: mongoose.model('Offer', Offer)
-}
+module.exports = mongoose.model('Offer', Offer);
