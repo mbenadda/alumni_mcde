@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var logger   = require('./logger');
 
@@ -18,5 +20,4 @@ module.exports = function () {
   db.once('open', function () {
     logger.info('Connection to MongoDB database successfully established.');
   });
-
-}
+};

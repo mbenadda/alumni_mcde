@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (app) {
 
   app.use('/auth', require('./auth'));
@@ -6,4 +8,4 @@ module.exports = function (app) {
 
   app.use('/offers', require('./offers'));
 
-}
+};

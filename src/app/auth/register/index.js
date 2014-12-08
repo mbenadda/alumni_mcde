@@ -1,16 +1,15 @@
-var _      = require('lodash');
+'use strict';
+
 var User   = require('../../../models/User.js');
 var logger = require('../../../lib/logger');
 
 module.exports = function (req, res, next) {
   var explicitUser;
 
-  console.log('req.body', req.body);
-
   explicitUser = {
     email: req.body.email,
     name: req.body.name
-  }
+  };
 
   User.register(new User(explicitUser), req.body.password,
     function (err, user) {
@@ -23,4 +22,4 @@ module.exports = function (req, res, next) {
                 .json(user)
                 .end();
     });
-}
+};

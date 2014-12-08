@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (req, res, next) {
 
   // Check that offer is correctly filled in, otherwise throw as this should not happen
@@ -10,4 +12,4 @@ module.exports = function (req, res, next) {
             .json(req.offer)
             .end();
 
-}
+};

@@ -1,3 +1,5 @@
+'use strict';
+
 var express    = require('express');
 var passport   = require('passport');
 var bodyParser = require('body-parser');
@@ -19,10 +21,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Connect to the database and get an instance of the connection
-var db = require('./lib/db')();
+require('./lib/db')();
 
 // Decentralize routing to a separate app folder and pass app as that's what the routes are bound to
-var routes = require('./app')(app);
+require('./app')(app);
 
 var server = app.listen(app.get('port'), function () {
   logger.info('Listening on port %d', server.address().port);
