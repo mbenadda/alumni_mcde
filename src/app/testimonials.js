@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var express = require('express');
 var inspect = require('eyes').inspector({ maxLength: false });
 var SpreadsheetResource = require('../lib/SpreadsheetResource');
@@ -10,6 +11,19 @@ var Testimonials = new SpreadsheetResource(require('../spreadsheets').testimonia
 
 router.get('/', function (req, res, next) {
   Testimonials.query().then(function (testimonials) {
+
+    // Keywords should be an array. So we make it so here.
+    testimonials = _.map(testimonials, function (item, index, array) {
+      return _.mapValues(item, function (value, key, object) {
+        if (key === 'keywords') {
+          return _.map(value.split(','), function (item, index, array) {
+            return item.trim();
+          });
+        }
+        return value;
+      });
+    });
+
     res.status(200)
        .json(testimonials)
        .end();
