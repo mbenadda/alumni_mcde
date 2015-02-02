@@ -1,5 +1,6 @@
 'use strict';
 
+var path       = require('path');
 var express    = require('express');
 var passport   = require('passport');
 var bodyParser = require('body-parser');
@@ -25,6 +26,7 @@ require('./lib/db')();
 
 // Decentralize routing to a separate app folder and pass app as that's what the routes are bound to
 require('./app')(app);
+app.get('*', express.static(path.join(__dirname, '../public'), { redirect: false }));
 
 var server = app.listen(app.get('port'), function () {
   logger.info('Listening on port %d', server.address().port);

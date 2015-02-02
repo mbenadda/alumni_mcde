@@ -1,13 +1,15 @@
 'use strict';
 
+var express = require('express');
+
 module.exports = function (app) {
 
-  app.use('/auth', require('./auth'));
+  app.use('/api/auth', require('./auth'));
 
-  app.use('/testimonials', require('./testimonials'));
+  app.use('/api/testimonials', require('./testimonials'));
 
-  app.use('/articles', require('./articles'));
+  app.use('/api/articles', require('./articles'));
 
-  app.use('/offers', require('./offers'));
+  app.use('/api/offers', require('./offers'));
 
 };
