@@ -13,7 +13,8 @@ router.get('/', function (req, res, next) {
   Testimonials.query().then(function (testimonials) {
 
     // Keywords should be an array. So we make it so here.
-    testimonials = _.map(testimonials, function (item, index, array) {
+    testimonials = _(testimonials)
+    .map(function (item, index, array) {
       return _.mapValues(item, function (value, key, object) {
         if (key === 'keywords') {
           return _.map(value.split(','), function (item, index, array) {
@@ -22,7 +23,9 @@ router.get('/', function (req, res, next) {
         }
         return value;
       });
-    });
+    })
+    .reverse()
+    .value();
 
     res.status(200)
        .json(testimonials)
