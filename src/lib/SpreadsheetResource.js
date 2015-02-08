@@ -47,11 +47,11 @@ module.exports = function (resourceUrl) {
 
         deferred.resolve(resourceList);
 
-        // Clean our cache 2 hours after we built it
+        // Clean our cache 5 minutes after we built it
         setTimeout(function () {
           deferred = Q.defer();
           resourceList = deferred.promise;
-        }, 2 * 3600 * 1000);
+        }, 5 * 60 * 1000);
 
       });
     }
