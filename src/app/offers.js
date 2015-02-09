@@ -12,12 +12,12 @@ var Offers = new SpreadsheetResource(require('../spreadsheets').offers);
 router.get('/', function (req, res, next) {
   Offers.query().then(function (offers) {
 
-    offers = _(offers)
+    var response = _(offers)
     .reverse()
     .value();
 
     res.status(200)
-       .json(offers)
+       .json(response)
        .end();
   });
 });
